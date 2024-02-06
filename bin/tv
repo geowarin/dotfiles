@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# DP-1
+# HDMI-A-1
+
+kscreen-doctor output.DP-1.disable output.HDMI-A-1.enable
+#kquitapp5 plasmashell || killall plasmashell; kstart5 plasmashell
+#  pactl list short sources
+#pactl set-default-sink alsa_output.pci-0000_2d_00.1.3.hdmi-stereo.monitor
+#pactl set-sink-volume @DEFAULT_SINK@ 65
+
+killall -q -HUP steam || /bin/true
+steam -gamepadui
+kscreen-doctor output.DP-1.enable output.HDMI-A-1.disable

@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+
+git tag -d last-build
+git tag last-build origin/master
+
+set -e
+
+#VERSION=4.2.dev
+VERSION=$(python -c 'import importlib
+version = importlib.import_module("version")
+print("{0}.{1}.{2}".format(version.major, version.minor, version.status))
+')
+TEMPLATE_DIR="$HOME/.local/share/godot/export_templates/$VERSION"
+
+#BUILD_OPTS=""
+#BUILD_OPTS="scu_build=yes linker=mold"
+
+for i in "$@"
+do
+case $i in
+    -m*|--mono*)
+    MONO=1
+    TEMPLATE_DIR=$HOME/.local/share/godot/export_templates/4.2.dev.mono
+    ;;
+    -e*|--export-templates*)
+    EXPORT_TEMPLATES=1
+    ;;
+    # -l=*|--lib=*)
+    # DIR="${i#*=}"
+    # ;;
+    *)
+    # unknown option
+    ;;
+esac
+done
+
+#builtin_embree=no builtin_enet=no builtin_freetype=no builtin_graphite=no builtin_harfbuzz=no
+#builtin_libogg=no builtin_libpng=no builtin_libtheora=no builtin_libvorbis=no builtin_libwebp=no
+#builtin_mbedtls=yes builtin_miniupnpc=no builtin_pcre2=no builtin_zlib=no builtin_zstd=no
+#scons module_mono_enabled=yes compiledb=yes scu_build=yes
+
+if [[ $MONO -eq 1 ]]; 
+then
+    scons module_mono_enabled=yes scu_build=yes linker=mold compiledb=yes
+else
+    scons scu_build=yes linker=mold compiledb=yes
+fi
+
+if [[ $MONO -eq 1 ]];
+then 
+    ./bin/godot.linuxbsd.editor.x86_64.mono --headless --generate-mono-glue modules/mono/glue
+    #dotnet nuget add source ~/dev/LocalNugetSource --name LocalNugetSource
+    ./modules/mono/build_scripts/build_assemblies.py --godot-output-dir=./bin \
+        --push-nupkgs-local ~/dev/LocalNugetSource
+fi
+
+if [[ $EXPORT_TEMPLATES -eq 1 ]];
+then 
+    scons target=template_release scu_build=yes platform=linuxbsd
+    mkdir -p "$TEMPLATE_DIR"
+    mv bin/godot.linuxbsd.template_release.x86_64 "$TEMPLATE_DIR/linux_release.x86_64"
+    
+    scons target=template_release scu_build=yes dlink_enabled=yes platform=web
+    mkdir -p "$TEMPLATE_DIR"
+    mv bin/godot.web.template_release.wasm32.dlink.zip "$TEMPLATE_DIR/web_dlink_release.zip"  
+      
+    scons target=template_debug scu_build=yes dlink_enabled=yes platform=web
+    mkdir -p "$TEMPLATE_DIR"
+    mv bin/godot.web.template_debug.wasm32.dlink.zip "$TEMPLATE_DIR/web_dlink_debug.zip"
+
+    if [[ $MONO -eq 1 ]]; 
+    then 
+        scons target=template_debug scu_build=yes module_mono_enabled=yes platform=linuxbsd
+        mv bin/godot.linuxbsd.template_release.x86_64.mono "$TEMPLATE_DIR/linux_release.x86_64"
+    fi
+fi
+
+
+rm "$HOME/bin/godot" || true
+if [[ $MONO -eq 1 ]]; 
+then
+    ln -s "$PWD/bin/godot.linuxbsd.editor.x86_64.mono" "$HOME/bin/godot"
+else
+    ln -s "$PWD/bin/godot.linuxbsd.editor.x86_64" "$HOME/bin/godot"
+fi
+
