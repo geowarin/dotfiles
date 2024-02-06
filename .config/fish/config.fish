@@ -3,7 +3,9 @@ if status is-interactive
 end
 
 if status --is-login
-    # set -gx PATH $PATH $HOME/bin
+    set -gx PATH $PATH $HOME/bin
+    # scons
+    set -gx PATH $PATH $HOME/.local/bin
 end
 
 zoxide init fish | source

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Service
+MimeType=video/*;
+Actions=ExtractSubs;
+X-KDE-Submenu=Media
+
+[Desktop Action ExtractSubs]
+Name=Extract Subs
+Icon=vlc
+Exec=ffmpeg -i %u $(basename %u .mkv).srt
