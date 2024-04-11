@@ -1,10 +1,10 @@
 [Desktop Entry]
 Type=Service
 MimeType=inode/directory;application/octet-stream;
-Actions=OpenInIdea;
+Actions=OpenInCode;
 X-KDE-Submenu=Dev
 
-[Desktop Action OpenInIdea]
-Name=Open in Idea
+[Desktop Action OpenInCode]
+Name=Open in Code
 Icon=code-context
-Exec=idea %u
+Exec=code %u

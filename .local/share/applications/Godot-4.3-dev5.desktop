@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Godot 4.3 dev
+Exec=/home/geo/dev/tools/Godot_v4.3-dev5_linux.x86_64
+Terminal=false
+Type=Application
+Icon=godot
+Categories=Development;
+NoDisplay=false

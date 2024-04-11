@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Service
+MimeType=inode/directory;application/octet-stream;text/*;
+Actions=IdeaDiff;
+X-KDE-Submenu=Dev
+
+[Desktop Action IdeaDiff]
+Name=Diff (idea)
+Icon=code-context
+Exec=idea diff %U

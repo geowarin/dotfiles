@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Asset Forge
+Exec=/home/geo/bin/asset-forge
+Terminal=false
+Type=Application
+Icon=rpg-maker-mv
+Categories=Development;
+NoDisplay=false
