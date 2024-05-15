@@ -1,0 +1,15 @@
+[Desktop Entry]
+Comment=
+Exec=/home/geo/bin/godot-mono
+GenericName=
+Icon=/home/geo/Pictures/icons/Godot-green.svg
+Name=Godot C#
+NoDisplay=false
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=
+Categories=Development;

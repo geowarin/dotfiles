@@ -1,0 +1,14 @@
+[Desktop Entry]
+Categories=Development;
+Comment=
+Exec=/home/geo/bin/godot
+Icon=/home/geo/Pictures/icons/Godot-red.svg
+Name=Godot Master
+NoDisplay=false
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=

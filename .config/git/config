@@ -58,3 +58,6 @@
 	smudge = git-lfs smudge -- %f
 [hub]
 	protocol = https
+[user]
+	name = Geoffroy Warin
+	email = code@geowarin.com
