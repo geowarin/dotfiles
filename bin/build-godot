@@ -76,11 +76,10 @@ then
 fi
 
 
-rm "$HOME/bin/godot" || true
 if [[ $MONO -eq 1 ]]; 
 then
-    ln -s "$PWD/bin/godot.linuxbsd.editor.x86_64.mono" "$HOME/bin/godot"
+    ln -fs "$PWD/bin/godot.linuxbsd.editor.x86_64.mono" "$HOME/bin/godot-master"
 else
-    ln -s "$PWD/bin/godot.linuxbsd.editor.x86_64" "$HOME/bin/godot"
+    ln -fs "$PWD/bin/godot.linuxbsd.editor.x86_64" "$HOME/bin/godot-mono-master"
 fi
 

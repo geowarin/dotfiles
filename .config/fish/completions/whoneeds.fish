@@ -1,0 +1,1 @@
+complete -c whoneeds -a "(paru -Qa | cut -d ' ' -f 1)"
