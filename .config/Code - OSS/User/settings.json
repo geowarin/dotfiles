@@ -1,0 +1,20 @@
+{
+    "telemetry.telemetryLevel": "off",
+    "window.zoomLevel": 1,
+    "files.autoSave": "onFocusChange",
+    "editor.formatOnSave": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "workbench.tree.indent": 12,
+    "symbols.hidesExplorerArrows": false,
+    "explorer.fileNesting.patterns": {
+        "*": "${capture}.uid,${capture}.import"
+    },
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.expand": false,
+    "godotFiles.documentation.webview.hideSidebar": true,
+    "workbench.iconTheme": "file-icons",
+    "workbench.colorTheme": "Monokai++ Unified",
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "git.enableSmartCommit": true
+}

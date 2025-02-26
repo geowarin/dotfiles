@@ -5,6 +5,8 @@ git tag last-build origin/master
 
 set -e
 
+pushd /home/geo/dev/godot/
+
 #VERSION=4.2.dev
 VERSION=$(python -c 'import importlib
 version = importlib.import_module("version")
@@ -83,3 +85,4 @@ else
     ln -fs "$PWD/bin/godot.linuxbsd.editor.x86_64" "$HOME/bin/godot-mono-master"
 fi
 
+popd

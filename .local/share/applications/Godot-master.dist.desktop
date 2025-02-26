@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Development;
 Comment=
-Exec=/home/geo/bin/godot
+Exec=/home/geo/bin/godot-master
 Icon=/home/geo/Pictures/icons/Godot-red.svg
 Name=Godot Master
 NoDisplay=false
