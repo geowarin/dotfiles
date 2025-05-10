@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+files=$1
+keys="/home/geo/Games/retrodeck/bios/switch/keys/prod.keys"
+
+base_dir=$(dirname "$(realpath "$1")")
+base="$(basename "$1")"
+
+echo "convert $files to nsp in base_dir"
+
+docker run \
+  -v "$keys":/root/.switch/prod.keys  \
+  -v "$base_dir":/work \
+  ghcr.io/nozwock/yanu convert "$base" \
+  --kind nsp

@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# Check if there are at least two arguments
+if [ "$#" -lt 2 ]; then
+  echo "Please provide at least two files as arguments."
+  exit 1
+fi
+
+# Sort the files by size in descending order
+readarray -t sorted_files < <(ls -S "$@")
+
+keys="/home/geo/Games/retrodeck/bios/switch/keys/prod.keys"
+base_dir=$(dirname "$(realpath "${sorted_files[0]}")")
+
+base="$(basename "${sorted_files[0]}")"
+update="$(basename "${sorted_files[1]}")"
+
+echo "Patching $base with $update (in dir $base_dir)"
+
+docker run \
+  -v "$keys":/root/.switch/prod.keys  \
+  -v "$base_dir":/work ghcr.io/nozwock/yanu update \
+  --base "$base" \
+  --update "$update" 2>&1 \
+  | zenity --text-info --title="Command Output" --width=800 --height=600

@@ -16,5 +16,12 @@
     "workbench.colorTheme": "Monokai++ Unified",
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
-    "git.enableSmartCommit": true
+    "git.enableSmartCommit": true,
+    "jupyter.experiments.enabled": false,
+    "[jsonc]": {
+        "editor.defaultFormatter": "denoland.vscode-deno"
+    },
+    "jupyter.kernels.trusted": [
+        "/home/geo/.local/share/jupyter/kernels/deno/kernel.json"
+    ]
 }

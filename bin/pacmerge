@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+sudo P3WM_RESOLVE_TOOL='/home/geo/.local/share/JetBrains/Toolbox/scripts/idea merge $LOCAL $REMOTE $BASE $MERGED' p3wm "$(fd ".+\.pac(new|save)" /etc 2> /dev/null | fzf)"

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Service
+MimeType=application/retro-game;
+Actions=PatchNSP;
+X-KDE-Submenu=Emulation
+
+[Desktop Action PatchNSP]
+Name=Patch NSP
+Icon=kr-combine
+Exec=nsp-patch %F
