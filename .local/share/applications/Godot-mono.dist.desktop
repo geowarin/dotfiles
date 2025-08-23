@@ -13,3 +13,4 @@ Type=Application
 X-KDE-SubstituteUID=false
 X-KDE-Username=
 Categories=Development;
+MimeType=application/x-godot-project;

@@ -13,9 +13,12 @@ version = importlib.import_module("version")
 print("{0}.{1}.{2}".format(version.major, version.minor, version.status))
 ')
 TEMPLATE_DIR="$HOME/.local/share/godot/export_templates/$VERSION"
+LTO=auto
 
 #BUILD_OPTS=""
 #BUILD_OPTS="scu_build=yes linker=mold"
+
+# paru -S
 
 for i in "$@"
 do
@@ -26,6 +29,9 @@ case $i in
     ;;
     -e*|--export-templates*)
     EXPORT_TEMPLATES=1
+    ;;
+    --lto*)
+    LTO=full
     ;;
     # -l=*|--lib=*)
     # DIR="${i#*=}"
@@ -43,9 +49,9 @@ done
 
 if [[ $MONO -eq 1 ]]; 
 then
-    scons module_mono_enabled=yes scu_build=yes linker=mold compiledb=yes
+    scons lto=$LTO production=yes scu_build=yes linker=mold compiledb=yes module_mono_enabled=yes 
 else
-    scons scu_build=yes linker=mold compiledb=yes
+    scons lto=$LTO production=yes scu_build=yes linker=mold compiledb=yes
 fi
 
 if [[ $MONO -eq 1 ]];

@@ -9,6 +9,9 @@ if status --is-login
     # cargo
     set -gx PATH $PATH $HOME/.cargo/bin
 
+    # npm global
+    set -gx npm_config_prefix "$HOME/.local"
+
     # Opt out of dotnet telemetry
     set -gx DOTNET_CLI_TELEMETRY_OPTOUT 1
 

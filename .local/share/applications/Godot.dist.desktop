@@ -6,3 +6,4 @@ Type=Application
 Icon=godot
 Categories=Development;
 NoDisplay=false
+MimeType=application/x-godot-project;

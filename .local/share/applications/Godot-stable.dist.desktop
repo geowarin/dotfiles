@@ -1,4 +1,5 @@
 [Desktop Entry]
+Categories=Development;
 Comment=
 Exec=/home/geo/bin/godot-stable
 GenericName=4.2.2
@@ -6,10 +7,11 @@ Icon=/home/geo/Pictures/icons/Godot-yellow.svg
 Name=Godot stable
 NoDisplay=false
 Path=
+PrefersNonDefaultGPU=false
 StartupNotify=true
 Terminal=false
 TerminalOptions=
 Type=Application
 X-KDE-SubstituteUID=false
 X-KDE-Username=
-Categories=Development;
+MimeType=application/x-godot-project;
