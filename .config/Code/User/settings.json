@@ -1,0 +1,40 @@
+{
+    "telemetry.telemetryLevel": "off",
+    "window.zoomLevel": 1,
+    "files.autoSave": "onFocusChange",
+    "editor.formatOnSave": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "workbench.tree.indent": 12,
+    "symbols.hidesExplorerArrows": false,
+    "explorer.fileNesting.patterns": {
+        "*": "${capture}.uid,${capture}.import"
+    },
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.expand": false,
+    "godotFiles.documentation.webview.hideSidebar": true,
+    "workbench.iconTheme": "file-icons",
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "git.enableSmartCommit": true,
+    "jupyter.experiments.enabled": false,
+    "[jsonc]": {
+        "editor.defaultFormatter": "denoland.vscode-deno"
+    },
+    "jupyter.kernels.trusted": [
+        "/home/geo/.local/share/jupyter/kernels/deno/kernel.json"
+    ],
+    "workbench.colorTheme": "Monokai++ Unified",
+    "[json]": {
+        "editor.defaultFormatter": "denoland.vscode-deno"
+    },
+    "update.showReleaseNotes": false,
+    "git.openRepositoryInParentFolders": "never",
+    "editor.minimap.enabled": false,
+    "extensions.ignoreRecommendations": true,
+    "go.toolsManagement.autoUpdate": true,
+    "[gdscript]": {
+        "editor.insertSpaces": false,
+        "editor.detectIndentation": false
+    },
+    "git.confirmSync": false
+}
