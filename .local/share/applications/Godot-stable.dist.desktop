@@ -1,9 +1,9 @@
 [Desktop Entry]
 Categories=Development;
 Comment=
-Exec=/home/geo/bin/godot-stable
+Exec=$HOME/bin/godot-stable
 GenericName=4.2.2
-Icon=/home/geo/Pictures/icons/Godot-yellow.svg
+Icon=Godot-yellow
 Name=Godot stable
 NoDisplay=false
 Path=

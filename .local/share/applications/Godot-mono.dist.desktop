@@ -1,16 +1,17 @@
 [Desktop Entry]
+Categories=Development;
 Comment=
-Exec=/home/geo/bin/godot-mono
+Exec=$HOME/bin/godot-mono
 GenericName=
-Icon=/home/geo/Pictures/icons/Godot-green.svg
+Icon=Godot-green
+MimeType=application/x-godot-project;
 Name=Godot C#
 NoDisplay=false
 Path=
+PrefersNonDefaultGPU=false
 StartupNotify=true
 Terminal=false
 TerminalOptions=
 Type=Application
 X-KDE-SubstituteUID=false
 X-KDE-Username=
-Categories=Development;
-MimeType=application/x-godot-project;
