@@ -33,6 +33,9 @@ case $i in
     --lto*)
     LTO=full
     ;;
+    --no-lto*)
+    LTO=none
+    ;;
     # -l=*|--lib=*)
     # DIR="${i#*=}"
     # ;;
@@ -47,15 +50,15 @@ done
 #builtin_mbedtls=yes builtin_miniupnpc=no builtin_pcre2=no builtin_zlib=no builtin_zstd=no
 #scons module_mono_enabled=yes compiledb=yes scu_build=yes
 
-if [[ $MONO -eq 1 ]]; 
+if [[ $MONO -eq 1 ]];
 then
-    scons lto=$LTO production=yes scu_build=yes linker=mold compiledb=yes module_mono_enabled=yes 
+    scons lto=$LTO production=yes scu_build=yes linker=mold compiledb=yes module_mono_enabled=yes
 else
     scons lto=$LTO production=yes scu_build=yes linker=mold compiledb=yes
 fi
 
 if [[ $MONO -eq 1 ]];
-then 
+then
     ./bin/godot.linuxbsd.editor.x86_64.mono --headless --generate-mono-glue modules/mono/glue
     #dotnet nuget add source ~/dev/LocalNugetSource --name LocalNugetSource
     ./modules/mono/build_scripts/build_assemblies.py --godot-output-dir=./bin \
@@ -63,28 +66,28 @@ then
 fi
 
 if [[ $EXPORT_TEMPLATES -eq 1 ]];
-then 
+then
     scons target=template_release scu_build=yes platform=linuxbsd
     mkdir -p "$TEMPLATE_DIR"
     mv bin/godot.linuxbsd.template_release.x86_64 "$TEMPLATE_DIR/linux_release.x86_64"
-    
+
     scons target=template_release scu_build=yes dlink_enabled=yes platform=web
     mkdir -p "$TEMPLATE_DIR"
-    mv bin/godot.web.template_release.wasm32.dlink.zip "$TEMPLATE_DIR/web_dlink_release.zip"  
-      
+    mv bin/godot.web.template_release.wasm32.dlink.zip "$TEMPLATE_DIR/web_dlink_release.zip"
+
     scons target=template_debug scu_build=yes dlink_enabled=yes platform=web
     mkdir -p "$TEMPLATE_DIR"
     mv bin/godot.web.template_debug.wasm32.dlink.zip "$TEMPLATE_DIR/web_dlink_debug.zip"
 
-    if [[ $MONO -eq 1 ]]; 
-    then 
+    if [[ $MONO -eq 1 ]];
+    then
         scons target=template_debug scu_build=yes module_mono_enabled=yes platform=linuxbsd
         mv bin/godot.linuxbsd.template_release.x86_64.mono "$TEMPLATE_DIR/linux_release.x86_64"
     fi
 fi
 
 
-if [[ $MONO -eq 1 ]]; 
+if [[ $MONO -eq 1 ]];
 then
     ln -fs "$PWD/bin/godot.linuxbsd.editor.x86_64.mono" "$HOME/bin/godot-master"
 else
