@@ -15,8 +15,7 @@ print("{0}.{1}.{2}".format(version.major, version.minor, version.status))
 TEMPLATE_DIR="$HOME/.local/share/godot/export_templates/$VERSION"
 LTO=auto
 
-#BUILD_OPTS=""
-#BUILD_OPTS="scu_build=yes linker=mold"
+BUILD_OPTS="production=yes scu_build=yes linker=mold compiledb=yes"
 
 # paru -S
 
@@ -36,6 +35,10 @@ case $i in
     --no-lto*)
     LTO=none
     ;;
+    --tracy*)
+    BUILD_OPTS="$BUILD_OPTS profiler_path=/home/geo/dev/tools/tracy"
+    BUILD_OPTS="$BUILD_OPTS profiler=tracy"
+    ;;
     # -l=*|--lib=*)
     # DIR="${i#*=}"
     # ;;
@@ -52,9 +55,9 @@ done
 
 if [[ $MONO -eq 1 ]];
 then
-    scons lto=$LTO production=yes scu_build=yes linker=mold compiledb=yes module_mono_enabled=yes
+    scons lto=$LTO module_mono_enabled=yes $BUILD_OPTS
 else
-    scons lto=$LTO production=yes scu_build=yes linker=mold compiledb=yes
+    scons lto=$LTO $BUILD_OPTS
 fi
 
 if [[ $MONO -eq 1 ]];

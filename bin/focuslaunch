@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+PROGRAM_NAME="$@"
+
+# Try to find window by class
+id=$(kdotool search --class $PROGRAM_NAME --limit 1)
+
+# Fallback: Try by window title if class fails
+if [ -z "$id" ]; then
+  id=$(kdotool search --name $PROGRAM_NAME --limit 1)
+fi
+
+# If a window was found, activate and raise it
+if [ -n "$id" ]; then
+  kdotool windowactivate "$id"
+  kdotool windowraise "$id"
+else
+  # launch program by name if no window found
+  "$PROGRAM_NAME" &
+fi
