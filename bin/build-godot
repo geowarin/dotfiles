@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-git tag -d last-build
+git tag -d last-build 2>/dev/null; or true
 git tag last-build origin/master
 
 set -e
