@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=Godot
-Exec=$HOME/bin/godot
-Terminal=false
-Type=Application
-Icon=Godot
-Categories=Development;
-NoDisplay=false
-MimeType=application/x-godot-project;

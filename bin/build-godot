@@ -7,7 +7,6 @@ set -e
 
 pushd /home/geo/dev/godot/
 
-#VERSION=4.2.dev
 VERSION=$(python -c 'import importlib
 version = importlib.import_module("version")
 print("{0}.{1}.{2}".format(version.major, version.minor, version.status))
@@ -16,8 +15,6 @@ TEMPLATE_DIR="$HOME/.local/share/godot/export_templates/$VERSION"
 LTO=auto
 
 BUILD_OPTS="production=yes scu_build=yes linker=mold compiledb=yes"
-
-# paru -S
 
 for i in "$@"
 do
@@ -47,6 +44,8 @@ case $i in
     ;;
 esac
 done
+
+# https://gitlab.archlinux.org/archlinux/packaging/packages/godot/-/blob/main/PKGBUILD?ref_type=heads
 
 #builtin_embree=no builtin_enet=no builtin_freetype=no builtin_graphite=no builtin_harfbuzz=no
 #builtin_libogg=no builtin_libpng=no builtin_libtheora=no builtin_libvorbis=no builtin_libwebp=no
