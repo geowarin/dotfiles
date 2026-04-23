@@ -36,7 +36,7 @@
 [branch "main"]
 	remote = origin
 	merge = refs/heads/main
-	
+
 [include]
 	path = user
 
@@ -54,6 +54,7 @@
 	defaultBranch = main
 [credential]
 	helper = /usr/lib/git-core/git-credential-libsecret
+	credentialStore = secretservice
 [filter "lfs"]
 	process = git-lfs filter-process
 	required = true
