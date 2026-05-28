@@ -75,9 +75,18 @@ def main():
         os.remove(srt_file)
         print(f"Transcript saved to {output_file}")
 
-    # if ai flag is set
     if args.ai:
-        subprocess.run(["opencode", "run", f"Without changing the text of {output_file} organize it into paragraphs and logical parts. Add some heading, some punctuation where appropriate, and output a markdown file."])
+        prompt = (
+            f"You are processing a video transcript from {output_file}. "
+            "CRITICAL RULES:\n"
+            "1. NEVER change the actual words or content of what the speaker said. The transcript must remain faithful to the original speech.\n"
+            "2. You MAY add punctuation (commas, periods, question marks, etc.) and paragraph breaks for readability.\n"
+            "3. You MAY correct obvious spelling mistakes from auto-captioning.\n"
+            "4. You MAY tone down speech mannerisms (e.g., excessive 'um', 'uh', 'like', filler repetitions) but do NOT remove or alter any meaningful words.\n"
+            "5. Organize the transcript into logical sections with markdown headings.\n"
+            "Output a well-formatted markdown file."
+        )
+        subprocess.run(["opencode", "run", prompt])
 
 if __name__ == "__main__":
     main()

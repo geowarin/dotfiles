@@ -14,8 +14,6 @@ print("{0}.{1}.{2}".format(version.major, version.minor, version.status))
 TEMPLATE_DIR="$HOME/.local/share/godot/export_templates/$VERSION"
 LTO=auto
 
-BUILD_OPTS="production=yes scu_build=yes linker=mold compiledb=yes"
-
 for i in "$@"
 do
 case $i in
@@ -45,18 +43,77 @@ case $i in
 esac
 done
 
+# CachyOS flags
+CFLAGS="-march=native -O3 -pipe -fno-plt -fexceptions \
+        -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security \
+        -fstack-clash-protection -fcf-protection"
+CXXFLAGS="$CFLAGS -Wp,-D_GLIBCXX_ASSERTIONS"
+LDFLAGS="-Wl,-O1 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now \
+         -Wl,-z,pack-relative-relocs"
+
 # https://gitlab.archlinux.org/archlinux/packaging/packages/godot/-/blob/main/PKGBUILD?ref_type=heads
 
-#builtin_embree=no builtin_enet=no builtin_freetype=no builtin_graphite=no builtin_harfbuzz=no
-#builtin_libogg=no builtin_libpng=no builtin_libtheora=no builtin_libvorbis=no builtin_libwebp=no
-#builtin_mbedtls=yes builtin_miniupnpc=no builtin_pcre2=no builtin_zlib=no builtin_zstd=no
-#scons module_mono_enabled=yes compiledb=yes scu_build=yes
+_args=(
+#  -j$(nproc --all)
+  cflags="$CFLAGS -fPIC -Wl,-z,relro,-z,now -w"
+  cxxflags="$CXXFLAGS -fPIC -Wl,-z,relro,-z,now -w"
+  linkflags="$LDFLAGS"
+#  arch=$_CARCH
+  production=yes
+  scu_build=yes
+#  mold does not seem to work with system libraries
+#  linker=mold
+  compiledb=yes
+# using embedded libs
+  builtin_clipper2=yes
+  builtin_enet=yes
+  builtin_glslang=yes
+  builtin_harfbuzz=yes
+  builtin_icu4c=yes
+  builtin_mbedtls=yes
+  builtin_msdfgen=yes
+  builtin_recastnavigation=yes
+  builtin_rvo2_2d=yes
+  builtin_rvo2_3d=yes
+  builtin_wslay=yes
+  builtin_xatlas=yes
+# using system libs
+  builtin_brotli=no
+  builtin_certs=no
+  builtin_embree=no
+  builtin_freetype=no
+  builtin_graphite=no
+  builtin_libogg=no
+  builtin_libpng=no
+  builtin_libtheora=no
+  builtin_libvorbis=no
+  builtin_libwebp=no
+  builtin_miniupnpc=no
+  builtin_openxr=no
+  builtin_pcre2=no
+  builtin_pcre2_with_jit=no
+  builtin_squish=no
+  builtin_zlib=no
+  builtin_zstd=no
+#  colored=yes
+#  debug_symbols=yes
+#  disable_exceptions=false
+#  platform=linuxbsd
+#  pulseaudio=yes
+#  production=yes
+  system_certs_path=/etc/ssl/certs/ca-certificates.crt
+#  target=editor
+#  use_llvm=no
+#  werror=no
+)
+
+echo "${_args[@]}"
 
 if [[ $MONO -eq 1 ]];
 then
-    scons lto=$LTO module_mono_enabled=yes $BUILD_OPTS
+    scons lto=$LTO module_mono_enabled=yes "${_args[@]}"
 else
-    scons lto=$LTO $BUILD_OPTS
+    scons lto=$LTO "${_args[@]}"
 fi
 
 if [[ $MONO -eq 1 ]];
